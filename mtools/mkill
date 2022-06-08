@@ -16,7 +16,8 @@ echo $ID
 echo "-------start kill--------"
 for id in $ID
 do
-    echo "please input(y/n/e):"
+    info=$(ps -a | grep "$NAME" | grep "$id")
+    echo "about to kill process info[$info]?(y/n/e):"
     read cmd
     if [ "y" = $cmd ]; then
         kill -9 $id
