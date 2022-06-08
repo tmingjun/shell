@@ -1,0 +1,39 @@
+#!/bin/sh
+
+#使用脚本杀死指定进程
+NAME=$1
+if [ -z "$NAME" ];then
+    echo "not input parameter, use default:qemu"
+    NAME="qemu"
+    echo $NAME
+else
+    echo $NAME
+fi
+
+ID=`ps -ef | grep "$NAME" | grep -v "$0" | grep -v "grep" | awk '{print $2}'`
+
+echo $ID
+echo "-------start kill--------"
+for id in $ID
+do
+    echo "please input(y/n/e):"
+    read cmd
+    if [ "y" = $cmd ]; then
+        kill -9 $id
+        echo "killed $id"
+        continue
+    elif [ "n" = $cmd ]; then
+        echo "ignore $id"
+        continue
+    elif [ "e" = $cmd ]; then
+        echo "exit mkill"
+        exit
+    else
+        echo "exit mkill"
+        exit
+    fi
+done
+echo "--------end kill---------"
+
+
+
