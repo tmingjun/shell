@@ -16,9 +16,8 @@ echo $ID
 echo "-------start kill--------"
 for id in $ID
 do
-    info=$(ps -a | grep "$NAME" | grep "$id")
-    echo "about to kill process info[$info]?(y/n/e):"
-    read cmd
+    info=$(ps -ef | grep "$NAME" | grep "$id" |awk '{print "ower:"$1,"pid:"$2,"cmd:"$8}')
+    read -p "about to kill process info[$info]?(y/n/e):" cmd 
     if [ "y" = $cmd ]; then
         kill -9 $id
         echo "killed $id"
